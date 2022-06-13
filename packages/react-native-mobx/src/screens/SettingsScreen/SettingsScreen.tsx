@@ -1,16 +1,15 @@
-import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTheme } from 'styled-components/native'
 
 import { MenuView } from '~/components'
 import { useSnackbar } from '~/hooks'
-import { AppRoutes, TabRoutes, TabStackParams } from '~/navigation'
+import { AppRoutes, TabRoutes, TabScreenProps } from '~/navigation'
 import { ThemeValue } from '~/types'
 
 import { Container } from './SettingsScreen.style'
 
-type Props = StackScreenProps<TabStackParams, TabRoutes.Settings>
+type Props = TabScreenProps<TabRoutes.Settings>
 
 export const SettingsScreen = ({ navigation }: Props) => {
   const { onChangeTheme } = useTheme()

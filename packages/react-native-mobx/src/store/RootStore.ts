@@ -1,31 +1,19 @@
-import { configurePersistable } from 'mobx-persist-store'
-import { MMKV } from 'react-native-mmkv'
-
-import { HomeStore } from './HomeStore'
-
-const storage = new MMKV({
-  id: 'mmkv.persist.store',
-})
-
-configurePersistable(
-  {
-    storage: {
-      setItem: (key, data) => storage.set(key, data),
-      getItem: (key) => storage.getString(key) as string,
-      removeItem: (key) => storage.delete(key),
-    },
-    expireIn: Number.MAX_SAFE_INTEGER,
-    stringify: true,
-    debugMode: false,
-  },
-  { delay: 200, fireImmediately: false },
-)
+import { ActualDataStore } from './ActualData'
+import { AlbumsStore } from './Albums/Albums'
+import { PostsStore } from './Posts'
+import { UsersStore } from './Users/Users'
 
 export class RootStore {
-  homeStore: HomeStore
+  actualStore: ActualDataStore
+  postsStore: PostsStore
+  usersStore: UsersStore
+  albumsStore: AlbumsStore
 
   constructor() {
-    this.homeStore = new HomeStore(this)
+    this.actualStore = new ActualDataStore(this)
+    this.postsStore = new PostsStore(this)
+    this.usersStore = new UsersStore(this)
+    this.albumsStore = new AlbumsStore(this)
   }
 }
 

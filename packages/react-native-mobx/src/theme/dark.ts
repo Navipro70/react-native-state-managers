@@ -14,6 +14,7 @@ export const darkThemeColors = {
 
   textFirst: '#FFFFFF',
   textSecondary: '#000000',
+  textGray: 'rgba(255, 255, 255, 0.7)',
 
   backgroundFirst: '#141414',
 

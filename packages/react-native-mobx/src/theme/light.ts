@@ -11,6 +11,7 @@ export const lightThemeColors = {
 
   iconsFirst: '#333333',
   iconsSecond: 'rgba(51, 3, 0, 0.5)',
+  textGray: 'rgba(0, 0, 0, 0.3)',
 
   textFirst: '#000000',
   textSecondary: '#FFFFFF',

@@ -48,6 +48,24 @@ export const fonts = {
     line-height: 32px;
   `,
 
+  title6Regular: css`
+    font-family: ${FontNames.FredokaRegular};
+    font-size: 22px;
+    line-height: 30px;
+  `,
+
+  title7Regular: css`
+    font-family: ${FontNames.FredokaRegular};
+    font-size: 20px;
+    line-height: 28px;
+  `,
+
+  title8Regular: css`
+    font-family: ${FontNames.FredokaRegular};
+    font-size: 18px;
+    line-height: 24px;
+  `,
+
   bodyRegular: css`
     font-family: ${FontNames.FredokaRegular};
     font-size: 16px;

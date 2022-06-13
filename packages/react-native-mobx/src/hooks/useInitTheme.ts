@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { StatusBarStyle, useColorScheme } from 'react-native'
 
-import { StorageService, STORAGE_KEYS } from '~/services'
+import { StorageService, STORAGE_KEYS } from '~/services/StorageService'
 import { darkTheme, lightTheme, navDarkTheme, navLightTheme } from '~/theme'
 import { ThemeValue } from '~/types'
 

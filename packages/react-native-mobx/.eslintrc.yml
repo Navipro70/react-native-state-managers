@@ -57,7 +57,7 @@ rules:
   '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }]
   '@typescript-eslint/no-for-in-array': 'error'
   '@typescript-eslint/no-misused-new': 'error'
-  '@typescript-eslint/no-misused-promises': 'error'
+  '@typescript-eslint/no-misused-promises': 'off'
   '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn'
   '@typescript-eslint/no-require-imports': 'error'
   '@typescript-eslint/no-throw-literal': 'error'
@@ -71,7 +71,7 @@ rules:
   '@typescript-eslint/prefer-optional-chain': 'error'
   '@typescript-eslint/prefer-regexp-exec': 'error'
   '@typescript-eslint/prefer-string-starts-ends-with': 'error'
-  '@typescript-eslint/promise-function-async': 'error'
+  '@typescript-eslint/promise-function-async': 'off'
   '@typescript-eslint/switch-exhaustiveness-check': 'error'
   '@typescript-eslint/restrict-plus-operands': 'error'
   '@typescript-eslint/member-ordering': 'off'
@@ -95,5 +95,4 @@ rules:
   react-native/split-platform-components: 'warn'
   react-native/no-inline-styles: 'warn'
   react-native/no-color-literals: 'error'
-  react-native/no-raw-text: 'error'
   react-native/no-single-element-style-arrays: 'error'

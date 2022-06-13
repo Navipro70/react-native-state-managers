@@ -9,7 +9,7 @@ import { ThemeProvider } from 'styled-components/native'
 import { StyledSafeAreaProvider, ErrorBoundary } from './components'
 import { SnackbarProvider, StoreProvider, useInitTheme } from './hooks'
 import { AppNavigator } from './navigation'
-import { StorageService } from './services'
+import { StorageService } from './services/StorageService'
 
 if (!__DEV__) {
   console.log = () => {}
@@ -41,10 +41,10 @@ export const App = () => {
         <ErrorBoundary>
           <StoreProvider>
             <NavigationContainer theme={navTheme}>
-                <SnackbarProvider>
-                  <StatusBar {...statusBarProps} />
-                  <AppNavigator />
-                </SnackbarProvider>
+              <SnackbarProvider>
+                <StatusBar {...statusBarProps} />
+                <AppNavigator />
+              </SnackbarProvider>
             </NavigationContainer>
           </StoreProvider>
         </ErrorBoundary>
