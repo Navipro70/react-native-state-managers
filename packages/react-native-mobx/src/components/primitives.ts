@@ -1,3 +1,4 @@
+import { Keyboard } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import styled, { css } from 'styled-components/native'
@@ -72,3 +73,5 @@ export const fonts = {
     line-height: 20px;
   `,
 }
+
+export const DissmisableView = styled.View.attrs({ onTouchStart: Keyboard.dismiss })``

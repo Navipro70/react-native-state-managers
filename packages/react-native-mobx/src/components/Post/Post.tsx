@@ -21,13 +21,10 @@ const PREVIEW = 'https://picsum.photos/200/300'
 
 interface Props extends IPost {
   onPress?: () => void
+  onDelete: () => void
 }
 
-export const Post = ({ title, userId, body, onPress }: Props) => {
-  const onDelete = () => {
-    Alert.alert('Delete', 'Delete post')
-  }
-
+export const Post = ({ title, userId, body, onPress, onDelete }: Props) => {
   const onShowComments = () => {
     Alert.alert('Show comments', 'Show post comments')
   }
@@ -45,9 +42,11 @@ export const Post = ({ title, userId, body, onPress }: Props) => {
           <InteractionTouch onPress={onShowComments}>
             <Icons.Comment />
           </InteractionTouch>
-          <InteractionTouch onPress={onDelete}>
-            <Icons.Close />
-          </InteractionTouch>
+          {onDelete && (
+            <InteractionTouch onPress={onDelete}>
+              <Icons.Close />
+            </InteractionTouch>
+          )}
         </Row>
       </SpacedRow>
     </Container>

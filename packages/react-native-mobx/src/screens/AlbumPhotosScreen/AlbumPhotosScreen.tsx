@@ -1,6 +1,7 @@
+import { isEmpty } from 'lodash'
 import { observer } from 'mobx-react-lite'
 import React, { useEffect, useLayoutEffect } from 'react'
-import { ListRenderItem } from 'react-native'
+import { ListRenderItem, TouchableOpacity } from 'react-native'
 
 import { LoadingView } from '~/components'
 import { useStore } from '~/hooks'
@@ -21,7 +22,13 @@ export const AlbumPhotosScreen = observer(({ navigation, route }: Props) => {
   const renderItem: ListRenderItem<IAlbumPhoto> = ({ item, index }) => {
     const isLast = (index + 1) % 4 === 0
 
-    return <AlbumPhoto isLast={isLast} source={{ uri: item.thumbnailUrl }} />
+    const onDelete = () => album.deletePhoto(item.id)
+
+    return (
+      <TouchableOpacity onPress={onDelete}>
+        <AlbumPhoto isLast={isLast} source={{ uri: item.thumbnailUrl }} />
+      </TouchableOpacity>
+    )
   }
 
   useLayoutEffect(() => {
@@ -29,7 +36,7 @@ export const AlbumPhotosScreen = observer(({ navigation, route }: Props) => {
   }, [albumTitle])
 
   useEffect(() => {
-    void album.loadPhotos()
+    if (isEmpty(album.photos)) void album.loadPhotos()
   }, [])
 
   if (album.isLoading) return <LoadingView />

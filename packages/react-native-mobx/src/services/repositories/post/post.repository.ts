@@ -1,6 +1,6 @@
 import { NetworkClient } from '~/services/networkClient'
 
-import { IPostResponse } from './post.types'
+import { IPostBody, IPostResponse } from './post.types'
 
 export const postRepository = {
   async getAll() {
@@ -8,18 +8,13 @@ export const postRepository = {
     return data
   },
 
-  async getByUserId(id: number) {
+  async getAllByUserId(id: number) {
     const { data } = await NetworkClient.instance.get<IPostResponse[]>(`posts?userId=${id}`)
     return data
   },
 
-  async getById(id: number) {
-    const { data } = await NetworkClient.instance.get<IPostResponse>(`posts/${id}`)
-    return data
-  },
-
-  async create() {
-    const { data } = await NetworkClient.instance.post<IPostResponse>('posts')
+  async create(post: IPostBody) {
+    const { data } = await NetworkClient.instance.post<IPostResponse>('posts', post)
     return data
   },
 

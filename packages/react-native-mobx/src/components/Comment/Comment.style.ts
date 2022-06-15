@@ -24,8 +24,9 @@ export const Body = styled(Span)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-export const EndContent = styled(Row)`
-  margin-top: 12px;
+export const SpacedRow = styled(Row)`
+  justify-content: space-between;
+  align-items: center;
 
-  justify-content: flex-end;
+  margin-top: 12px;
 `

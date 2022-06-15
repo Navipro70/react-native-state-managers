@@ -17,4 +17,14 @@ export const albumsRepository = {
     const { data } = await NetworkClient.instance.get<IPhotoAlbumResponse[]>(`/albums/${id}/photos`)
     return data
   },
+
+  async deleteAlbum(id: number) {
+    const { data } = await NetworkClient.instance.delete<boolean>(`/albums/${id}`)
+    return data
+  },
+
+  async deleteAlbumPhoto(id: number) {
+    const { data } = await NetworkClient.instance.delete<boolean>(`/photos/${id}`)
+    return data
+  },
 }

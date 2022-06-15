@@ -4,3 +4,9 @@ export interface IPostResponse {
   title: string
   body: string
 }
+
+export interface IPostBody {
+  userId: number
+  title: string
+  body: string
+}

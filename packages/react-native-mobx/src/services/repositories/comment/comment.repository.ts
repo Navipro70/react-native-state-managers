@@ -1,20 +1,15 @@
 import { NetworkClient } from '~/services/networkClient'
 
-import { ICommentResponse } from './comment.types'
+import { ICommentResponse, ICommentPostBody } from './comment.types'
 
 export const commentRepository = {
-  async getByPostId(id: number) {
+  async getAllByPostId(id: number) {
     const { data } = await NetworkClient.instance.get<ICommentResponse[]>(`comments?postId=${id}`)
     return data
   },
 
-  async getById(id: number) {
-    const { data } = await NetworkClient.instance.get<ICommentResponse[]>(`comments/${id}`)
-    return data
-  },
-
-  async create() {
-    const { data } = await NetworkClient.instance.post('comments')
+  async create(item: ICommentPostBody) {
+    const { data } = await NetworkClient.instance.post<ICommentResponse>('comments', item)
     return data
   },
 

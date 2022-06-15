@@ -21,6 +21,22 @@ export class ActualDataStore {
   getPostsByIds = (ids: number[]) => getReferencesByIds(ids, this.postsEntities)
   getAlbumsByIds = (ids: number[]) => getReferencesByIds(ids, this.albumsEntities)
 
+  getPostsByUserId = (userId: number) => {
+    const ids: number[] = []
+    this.postsEntities.forEach(({ data }) => {
+      if (data.userId === userId) ids.push(data.id)
+    })
+    return ids
+  }
+
+  getAlbumsByUserId = (userId: number) => {
+    const ids: number[] = []
+    this.albumsEntities.forEach(({ data }) => {
+      if (data.userId === userId) ids.push(data.id)
+    })
+    return ids
+  }
+
   getPostById = (id: number) => this.postsEntities.get(id)
   getAlbumById = (id: number) => this.albumsEntities.get(id)
 

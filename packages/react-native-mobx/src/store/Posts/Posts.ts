@@ -1,6 +1,7 @@
 import { flow, makeAutoObservable } from 'mobx'
 
 import { IPostResponse, postRepository } from '~/services/repositories'
+import { extractIds } from '~/utils'
 
 import { RootStore } from '../RootStore'
 
@@ -29,7 +30,7 @@ export class PostsStore {
     try {
       const posts: IPostResponse[] = yield postRepository.getAll()
       this.rootStore.actualStore.mergePosts(posts)
-      this.postIds = posts.map((post) => post.id)
+      this.postIds = extractIds(posts)
     } catch (error) {
       this.isError = true
     } finally {
@@ -37,5 +38,12 @@ export class PostsStore {
     }
   })
 
-  deleteByUserId = () => null
+  unshiftPostId = (id: number) => {
+    this.postIds.unshift(id)
+  }
+
+  deletePost = (id: number) => {
+    this.rootStore.actualStore.deletePost(id)
+    void postRepository.delete(id)
+  }
 }

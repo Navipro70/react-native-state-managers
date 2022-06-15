@@ -13,13 +13,14 @@ type Props = TabScreenProps<TabRoutes.Albums>
 
 export const AlbumsScreen = observer(({ navigation }: Props) => {
   const {
-    albumsStore: { albumsData, isLoading, loadAlbums },
+    albumsStore: { albumsData, isLoading, loadAlbums, deleteAlbum },
   } = useStore()
 
   const renderItem: ListRenderItem<IAlbum> = ({ item }) => {
     const onPress = () => navigation.navigate(AppRoutes.AlbumPhotos, { id: item.id })
+    const onDelete = () => deleteAlbum(item.id)
 
-    return <AlbumsPreview {...item} onPress={onPress} />
+    return <AlbumsPreview {...item} onDelete={onDelete} onPress={onPress} />
   }
 
   useEffect(() => {

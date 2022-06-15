@@ -38,9 +38,7 @@ export class UsersStore {
   })
 
   deleteUser = flow(function* (this: UsersStore, id: number) {
-    const userEntity = this.userById(id)
-    void userEntity?.delete()
-    void userRepository.delete(id)
+    void this.userById(id)?.delete()
     this.users = this.users.filter((user) => user.data.id !== id)
   })
 }

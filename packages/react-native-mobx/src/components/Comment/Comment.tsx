@@ -1,18 +1,25 @@
 import upperFirst from 'lodash/upperFirst'
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 
+import { Icons } from '~/assets'
 import { IPostComment } from '~/store/ActualData/entities'
 
-import { Title, Body, Container, EndContent } from './Comment.style'
+import { Title, Body, Container, SpacedRow } from './Comment.style'
 
-type Props = IPostComment
+interface Props extends IPostComment {
+  onDelete: () => void
+}
 
-export const Comment = ({ body, name, email }: Props) => (
+export const Comment = ({ body, name, email, onDelete }: Props) => (
   <Container>
     <Title>{upperFirst(name)}</Title>
     <Body>{upperFirst(body)}</Body>
-    <EndContent>
+    <SpacedRow>
       <Body>{email}</Body>
-    </EndContent>
+      <TouchableOpacity onPress={onDelete}>
+        <Icons.Close />
+      </TouchableOpacity>
+    </SpacedRow>
   </Container>
 )

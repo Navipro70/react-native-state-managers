@@ -32,4 +32,9 @@ export class AlbumEntity {
       this.isLoading = false
     }
   })
+
+  deletePhoto = (id: number) => {
+    void albumsRepository.deleteAlbumPhoto(id)
+    this.photos = this.photos.filter((photo) => photo.id !== id)
+  }
 }
