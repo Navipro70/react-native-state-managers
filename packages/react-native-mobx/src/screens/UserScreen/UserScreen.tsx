@@ -46,7 +46,8 @@ export const UserScreen = observer(({ navigation, route }: Props) => {
   }
 
   const renderPost: ListRenderItem<IPost> = ({ item }) => {
-    const onOpenPost = () => navigation.navigate(AppRoutes.Post, { id: item.id })
+    const onOpenPost = () =>
+      navigation.navigate(AppRoutes.Post, { id: item.id, email: user.data.email })
     const onDeletePost = () => user.deletePost(item.id)
 
     return <Post onDelete={onDeletePost} onPress={onOpenPost} {...item} />

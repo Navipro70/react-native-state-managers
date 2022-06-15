@@ -10,7 +10,7 @@ export interface AppStackParams extends Record<string, object | undefined> {
   [AppRoutes.TabNavigator]: NavigatorScreenParams<TabStackParams>
   [AppRoutes.User]: { id: number }
   [AppRoutes.AlbumPhotos]: { id: number }
-  [AppRoutes.Post]: { id: number }
+  [AppRoutes.Post]: { id: number; email?: string }
 
   [AppRoutes.Modal]: undefined
 }

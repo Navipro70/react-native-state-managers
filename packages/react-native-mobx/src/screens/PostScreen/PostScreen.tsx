@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
 import { LayoutAnimation, ListRenderItem } from 'react-native'
 
-import { Post, Comment, LoadingView } from '~/components'
+import { Post, Comment, LoadingView, PostForm } from '~/components'
 import { useStore } from '~/hooks'
 import { AppRoutes, AppScreenProps } from '~/navigation'
 import { IPostComment } from '~/store/ActualData/entities'
@@ -15,8 +15,14 @@ type Props = AppScreenProps<AppRoutes.Post>
 export const PostScreen = observer(({ navigation, route }: Props) => {
   const { actualStore, postsStore } = useStore()
 
-  const { id } = route.params
+  const { id, email } = route.params
   const post = actualStore.getPostById(id)!
+
+  const onAddComment = async (value: { title: string; text: string }) => {
+    if (email) {
+      void post.addComment({ name: value.title, body: value.text, email })
+    }
+  }
 
   const onDeletePost = () => {
     navigation.goBack()
@@ -48,6 +54,7 @@ export const PostScreen = observer(({ navigation, route }: Props) => {
       ListHeaderComponent={
         <HeaderWrapper>
           <Post onDelete={onDeletePost} {...post.data} />
+          {email && <PostForm isSubmitting={post.isAddingComment} onSubmit={onAddComment} />}
           <Title>Comments</Title>
         </HeaderWrapper>
       }
