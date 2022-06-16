@@ -7,12 +7,13 @@ import { FieldsWrapper, MultilineInput, Label } from './PostForm.style'
 
 interface Props {
   isSubmitting: boolean
+  initialValues?: { title: string; text: string }
   onSubmit: (value: { title: string; text: string }) => Promise<void>
 }
 
-export const PostForm = ({ isSubmitting, onSubmit }: Props) => {
-  const [title, setTitle] = useState('')
-  const [text, setText] = useState('')
+export const PostForm = ({ isSubmitting, initialValues, onSubmit }: Props) => {
+  const [title, setTitle] = useState(initialValues?.title ?? '')
+  const [text, setText] = useState(initialValues?.text ?? '')
 
   const onPressSubmit = async () => {
     await onSubmit({ title, text })

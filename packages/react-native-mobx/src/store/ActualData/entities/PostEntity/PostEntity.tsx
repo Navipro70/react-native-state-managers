@@ -1,6 +1,14 @@
 import { flow, makeAutoObservable } from 'mobx'
 
-import { commentRepository, ICommentPostBody, ICommentResponse } from '~/services/repositories'
+import {
+  commentRepository,
+  ICommentPatch,
+  ICommentPostBody,
+  ICommentResponse,
+  IPostPatch,
+  IPostResponse,
+  postRepository,
+} from '~/services/repositories'
 import { RootStore } from '~/store/RootStore'
 
 import { IPost, IPostComment } from './types'
@@ -9,12 +17,18 @@ export class PostEntity {
   rootStore: RootStore
 
   isAddingComment = false
+  isEditingComment = false
 
+  isEditing = false
   isLoading = false
   isError = false
 
   data: IPost
   comments: IPostComment[] = []
+
+  commentById = (id: number) => {
+    return this.comments.find((comment) => comment.id === id)
+  }
 
   constructor(rootStore: RootStore, data: IPost) {
     this.rootStore = rootStore
@@ -32,6 +46,26 @@ export class PostEntity {
       this.isError = true
     } finally {
       this.isLoading = false
+    }
+  })
+
+  updatePost = flow(function* (this: PostEntity, post: IPostPatch) {
+    try {
+      this.isEditing = true
+      this.data = (yield postRepository.update(this.data.id, post)) as IPostResponse
+    } finally {
+      this.isEditing = false
+    }
+  })
+
+  updateComment = flow(function* (this: PostEntity, comment: ICommentPatch) {
+    try {
+      this.isAddingComment = true
+      const updatedComment: ICommentResponse = yield commentRepository.update(comment)
+      const fullyComment = { ...this.commentById(comment.id), ...updatedComment }
+      this.comments = this.comments.map((item) => (item.id === comment.id ? fullyComment : item))
+    } finally {
+      this.isAddingComment = false
     }
   })
 

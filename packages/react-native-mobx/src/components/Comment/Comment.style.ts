@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 import { Row, Span } from '../primitives'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity.attrs({ activeOpacity: 0.7 })`
   padding: 20px;
 
   background-color: ${({ theme }) => theme.colors.primaryFirst};

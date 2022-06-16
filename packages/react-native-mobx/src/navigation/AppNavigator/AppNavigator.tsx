@@ -2,7 +2,14 @@ import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import { useTheme } from 'styled-components/native'
 
-import { AlbumPhotosScreen, InitialScreen, ModalScreen, UserScreen } from '~/screens'
+import {
+  AlbumPhotosScreen,
+  EditCommentScreen,
+  EditPostScreen,
+  InitialScreen,
+  ModalScreen,
+  UserScreen,
+} from '~/screens'
 import { PostScreen } from '~/screens/PostScreen/PostScreen'
 
 import { AppRoutes } from '../Routes'
@@ -35,6 +42,8 @@ export const AppNavigator = () => {
       </Stack.Group>
 
       <Stack.Group screenOptions={modalGroupOptions}>
+        <Stack.Screen component={EditPostScreen} name={AppRoutes.EditPost} />
+        <Stack.Screen component={EditCommentScreen} name={AppRoutes.EditComment} />
         <Stack.Screen component={ModalScreen} name={AppRoutes.Modal} />
       </Stack.Group>
     </Stack.Navigator>

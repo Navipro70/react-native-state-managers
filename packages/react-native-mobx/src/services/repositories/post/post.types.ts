@@ -10,3 +10,8 @@ export interface IPostBody {
   title: string
   body: string
 }
+
+export interface IPostPatch {
+  title?: string
+  body?: string
+}

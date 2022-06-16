@@ -7,6 +7,8 @@ export enum AppRoutes {
   AlbumPhotos = 'AlbumPhotosScreen',
 
   // Modals
+  EditPost = 'EditPostScreen',
+  EditComment = 'EditCommentScreen',
   Modal = 'ModalScreen',
 }
 

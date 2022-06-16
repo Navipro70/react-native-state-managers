@@ -1,6 +1,6 @@
 import { NetworkClient } from '~/services/networkClient'
 
-import { ICommentResponse, ICommentPostBody } from './comment.types'
+import { ICommentResponse, ICommentPostBody, ICommentPatch } from './comment.types'
 
 export const commentRepository = {
   async getAllByPostId(id: number) {
@@ -13,8 +13,8 @@ export const commentRepository = {
     return data
   },
 
-  async update(id: number) {
-    const { data } = await NetworkClient.instance.patch(`comments/${id}`)
+  async update({ id, ...comment }: ICommentPatch) {
+    const { data } = await NetworkClient.instance.patch(`comments/${id}`, comment)
     return data
   },
 

@@ -1,8 +1,9 @@
+import { useNavigation } from '@react-navigation/native'
 import { upperFirst } from 'lodash'
 import React from 'react'
-import { Alert } from 'react-native'
 
 import { Icons } from '~/assets'
+import { AppRoutes } from '~/navigation'
 import { IPost } from '~/store/ActualData/entities'
 
 import { Row } from '../primitives'
@@ -24,9 +25,13 @@ interface Props extends IPost {
   onDelete: () => void
 }
 
-export const Post = ({ title, userId, body, onPress, onDelete }: Props) => {
+export const Post = ({ id, title, userId, body, onPress, onDelete }: Props) => {
+  const { navigate } = useNavigation()
+
   const onShowComments = () => {
-    Alert.alert('Show comments', 'Show post comments')
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    navigate(AppRoutes.EditPost, { id })
   }
 
   return (

@@ -1,6 +1,6 @@
 import { NetworkClient } from '~/services/networkClient'
 
-import { IPostBody, IPostResponse } from './post.types'
+import { IPostBody, IPostPatch, IPostResponse } from './post.types'
 
 export const postRepository = {
   async getAll() {
@@ -18,8 +18,8 @@ export const postRepository = {
     return data
   },
 
-  async update(id: number) {
-    const { data } = await NetworkClient.instance.patch<IPostResponse>(`posts/${id}`)
+  async update(id: number, post: IPostPatch) {
+    const { data } = await NetworkClient.instance.patch<IPostResponse>(`posts/${id}`, post)
     return data
   },
 

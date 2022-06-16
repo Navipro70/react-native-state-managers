@@ -12,3 +12,9 @@ export interface ICommentPostBody {
   email: string
   body: string
 }
+
+export interface ICommentPatch {
+  id: number
+  name: string
+  body: string
+}
