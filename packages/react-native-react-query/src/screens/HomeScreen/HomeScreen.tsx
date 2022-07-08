@@ -1,25 +1,44 @@
 import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { LayoutAnimation, ListRenderItem } from 'react-native'
 
-import { Spinner } from '~/components'
+import { LoadingView, Post } from '~/components'
 import { useStore } from '~/hooks'
+import { AppRoutes, TabRoutes, TabScreenProps } from '~/navigation'
+import { IPost } from '~/store/ActualData/entities'
 
-import { Container, Title } from './HomeScreen.style'
+import { List } from './HomeScreen.style'
 
-export const HomeScreen = observer(() => {
-  const { top } = useSafeAreaInsets()
+type Props = TabScreenProps<TabRoutes.Home>
+
+export const HomeScreen = observer(({ navigation }: Props) => {
   const {
-    homeStore: { isLoading, users, setUsers },
+    postsStore: { isLoading, postsData, loadPosts, deletePost },
   } = useStore()
 
+  const renderItem: ListRenderItem<IPost> = ({ item }) => {
+    const onOpenPost = () => navigation.navigate(AppRoutes.Post, { id: item.id })
+    const onDeletePost = () => {
+      deletePost(item.id)
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    }
+
+    return <Post onDelete={onDeletePost} onPress={onOpenPost} {...item} />
+  }
+
   useEffect(() => {
-    void setUsers()
+    void loadPosts()
   }, [])
 
+  if (isLoading) {
+    return <LoadingView safeTop />
+  }
+
   return (
-    <Container topInsert={top}>
-      {isLoading ? <Spinner /> : <Title children={users[0]?.age} />}
-    </Container>
+    <List<IPost>
+      data={postsData}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={renderItem}
+    />
   )
 })

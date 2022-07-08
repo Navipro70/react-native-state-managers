@@ -1,3 +1,4 @@
+import { Keyboard } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import styled, { css } from 'styled-components/native'
@@ -48,9 +49,29 @@ export const fonts = {
     line-height: 32px;
   `,
 
+  title6Regular: css`
+    font-family: ${FontNames.FredokaRegular};
+    font-size: 22px;
+    line-height: 30px;
+  `,
+
+  title7Regular: css`
+    font-family: ${FontNames.FredokaRegular};
+    font-size: 20px;
+    line-height: 28px;
+  `,
+
+  title8Regular: css`
+    font-family: ${FontNames.FredokaRegular};
+    font-size: 18px;
+    line-height: 24px;
+  `,
+
   bodyRegular: css`
     font-family: ${FontNames.FredokaRegular};
     font-size: 16px;
     line-height: 20px;
   `,
 }
+
+export const DissmisableView = styled.View.attrs({ onTouchStart: Keyboard.dismiss })``

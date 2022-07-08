@@ -26,3 +26,5 @@ export const getHitSlop = (v: number, filter: hitSlopFilter[] = []) =>
   )
 
 export const platformSelect = <T>(options: { android: T; ios: T }) => Platform.select(options) as T
+
+export const extractIds = <T extends { id: number }>(arr: T[]) => arr.map((v) => v.id)
